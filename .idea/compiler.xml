@@ -7,13 +7,17 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="EurekaServer" />
-        <module name="APIGateway" />
+        <module name="zuul-gateway" />
+        <module name="TVService" />
         <module name="SearchService" />
+        <module name="APIGateway" />
+        <module name="eureka-server" />
+        <module name="message-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="eureka-server" target="1.5" />
       <module name="Search-Year" target="1.8" />
+      <module name="Test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -22,6 +26,11 @@
       <module name="EurekaServer" options="-parameters" />
       <module name="Search-Year" options="-parameters" />
       <module name="SearchService" options="-parameters" />
+      <module name="TVService" options="-parameters" />
+      <module name="Test" options="-parameters" />
+      <module name="eureka-server" options="-parameters" />
+      <module name="message-service" options="-parameters" />
+      <module name="zuul-gateway" options="-parameters" />
     </option>
   </component>
 </project>

@@ -2,50 +2,48 @@ package com.tv.service;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.tv.data.StaticData;
 import com.tv.model.TVProgram;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 @Service
-public class TVService {
+public class TVService extends Reader {
 
-    private String url = StaticData.API_MAIN_URL;
-    private BufferedReader br;
-    private JsonObject json;
     private ArrayList<Long> tvIdList;
 
     // id 로 프로그램의 모든 정보 JsonObject 로 반환
     public JsonObject getTVById(long id) {
 
+        String url = StaticData.API_MAIN_URL;
         url += "/tv/" + id;
         url += "?api_key=" + StaticData.API_KEY;
         url += "&language=" + StaticData.KOREAN;
 
-        getReader();
-        getJson();
+        JsonObject jsonObject = null;
 
-        return json;
+        getReader(url);
+        jsonObject = getJson();
+
+        return jsonObject;
     }
 
-    // 넷플릭스에서 방영중인 모든 TV 프로그램의 정보 리스트 반환
-    public ArrayList<TVProgram> getAllTV() {
+    // 넷플릭스에서 방영되는 모든 TV Program 목록 반환
+    public ArrayList<TVProgram> getAllTVPrograms() {
 
-        getTVId();
+        // 넷플릭스에서 방영되는 모든 TV Program 들의 tv_id 목록 반환
+        getAllTVIds();
 
         TVProgram tvProgram;
         ArrayList<TVProgram> tvPrograms = new ArrayList<>();
 
         ArrayList<Integer> seasons, genres;
 
-        for (int i = 0; i < 10; i++) {
-            JsonObject tv = getTVById(tvIdList.get(i));
+        for (long tvId : tvIdList) {
+            JsonObject tv = getTVById(tvId);
 
             tvProgram = new TVProgram();
 
@@ -103,7 +101,8 @@ public class TVService {
     }
 
     // 파일을 불러와 tvIdList 정보 업데이트
-    public void getTVId() {
+    // 넷플릭스에서 방영되는 모든 TV Program 들의 tv_id 목록 반환
+    public void getAllTVIds() {
 
         FileReader fr = null;
         BufferedReader br = null;
@@ -142,26 +141,40 @@ public class TVService {
         }
     }
 
+    // 장르 id 목록에 매칭되는 TV Program 목록 반환
+    public ArrayList<TVProgram> getTVProgramsByGenreId(ArrayList<Integer> genreIds) {
 
-    // 공통 함수
-    // API URL 반환값 읽어오기
-    public void getReader() {
+        ArrayList<TVProgram> tvPrograms = new ArrayList<>();
 
-        try {
-            URL getTvURL = new URL(url);
-            HttpURLConnection conn = (HttpURLConnection) getTvURL.openConnection();
-            conn.setRequestMethod(StaticData.protocol);
-            br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        for (TVProgram tvProgram : getAllTVPrograms()) {
 
-        } catch (Exception e) {
-            e.printStackTrace();
+            for (int genre : tvProgram.getGenres()) {
+                if (genreIds.contains(genre)) {
+                    tvPrograms.add(tvProgram);
+                    break;
+                }
+            }
+
         }
 
+        return tvPrograms;
     }
 
-    // 읽어온 정보 json 값으로 받기
-    public void getJson() {
+    // 장르 id 목록에 매칭되는 TV Program 목록 반환
+    public ArrayList<TVProgram> getTVProgramByGenreId(int genreId) {
 
-        json = JsonParser.parseReader(br).getAsJsonObject();
+        ArrayList<TVProgram> tvPrograms = new ArrayList<>();
+
+        for (TVProgram tvProgram : getAllTVPrograms()) {
+
+            if (tvProgram.getGenres().contains(genreId)) {
+                tvPrograms.add(tvProgram);
+            }
+        }
+
+        return tvPrograms;
     }
+
+
 }
+

@@ -13,7 +13,6 @@
         <module>SearchService</module>
         <module>APIGateway</module>
         <module>SearchService</module>
-        <module>Test</module>
         <module>TVService</module>
     </modules>
 

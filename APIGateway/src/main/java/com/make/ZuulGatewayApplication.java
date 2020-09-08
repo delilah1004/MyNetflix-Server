@@ -1,6 +1,5 @@
 package com.make;
 
-import com.tv.data.data.StaticData;
 import com.make.filter.ErrorFilter;
 import com.make.filter.PostFilter;
 import com.make.filter.PreFilter;
@@ -39,10 +38,5 @@ public class ZuulGatewayApplication {
 	@Bean
 	public ErrorFilter errorFilter() {
 		return new ErrorFilter();
-	}
-
-	@Bean
-	public StaticData staticData() {
-		return new StaticData();
 	}
 }

@@ -7,12 +7,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="EurekaServer" />
-        <module name="zuul-gateway" />
+        <module name="APIGateway" />
         <module name="TVService" />
         <module name="SearchService" />
-        <module name="APIGateway" />
-        <module name="eureka-server" />
-        <module name="message-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -28,9 +25,6 @@
       <module name="SearchService" options="-parameters" />
       <module name="TVService" options="-parameters" />
       <module name="Test" options="-parameters" />
-      <module name="eureka-server" options="-parameters" />
-      <module name="message-service" options="-parameters" />
-      <module name="zuul-gateway" options="-parameters" />
     </option>
   </component>
 </project>

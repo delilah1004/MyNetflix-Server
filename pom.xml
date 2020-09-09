@@ -8,13 +8,11 @@
     <artifactId>MyNetflix</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+
     <modules>
         <module>EurekaServer</module>
-        <module>SearchService</module>
         <module>APIGateway</module>
-        <module>SearchService</module>
-        <module>TVService</module>
+        <module>Service</module>
     </modules>
-
 
 </project>

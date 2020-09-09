@@ -19,7 +19,7 @@ public class TVController {
     @Autowired
     GenreService genreService;
 
-    // 넷플릭스에서 방영되는 모든 TV Program 목록 반환
+    // 넷플릭스에서 방영되는 모든 TV Program 목록 반환 - 페이징
     @GetMapping("/tv/all")
     public ArrayList<TVProgram> getAllTVPrograms(@RequestParam int pageNumber) {
 
@@ -54,13 +54,16 @@ public class TVController {
         return tvService.getTVProgramsByGenreIds(lastId, genreIds);
     }
 
-    // 최신순 TV Program 목록 반환
-
-
     // 연도별 TV Program 목록 반환
     @GetMapping("tv/search/year")
     public ArrayList<TVProgram> getTVProgramsByYear(@RequestParam long lastId, String year){
 
         return tvService.getTVProgramsByYear(lastId, year);
     }
+
+    // 인기순 영화 목록 반환
+
+    // 최신순 TV Program 목록 반환
+
+
 }

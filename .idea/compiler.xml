@@ -7,8 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="EurekaServer" />
+        <module name="Service" />
         <module name="APIGateway" />
-        <module name="TVService" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -24,7 +24,7 @@
       <module name="EurekaServer" options="-parameters" />
       <module name="Search-Year" options="-parameters" />
       <module name="SearchService" options="-parameters" />
-      <module name="TVService" options="-parameters" />
+      <module name="Service" options="-parameters" />
       <module name="Test" options="-parameters" />
     </option>
   </component>

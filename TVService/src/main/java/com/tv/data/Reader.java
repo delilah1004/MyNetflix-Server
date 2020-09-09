@@ -1,4 +1,4 @@
-package com.tv.service;
+package com.tv.data;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;

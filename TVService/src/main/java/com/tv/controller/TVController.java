@@ -21,16 +21,9 @@ public class TVController {
 
     // 넷플릭스에서 방영되는 모든 TV Program 목록 반환
     @GetMapping("/tv/all")
-    public ArrayList<TVProgram> getAllTVPrograms() {
+    public ArrayList<TVProgram> getAllTVPrograms(@RequestParam int pageNumber) {
 
-        return tvService.getAllTVPrograms();
-    }
-
-    // 장르명에 매칭되는 장르 id 값 반환
-    @GetMapping("/tv/genre")
-    public int getGenreId(@RequestParam String genreName) {
-
-        return genreService.getGenreId(genreName);
+        return tvService.getAllTVPrograms(pageNumber);
     }
 
     // 모든 TV Program 을 분류하는 장르명 목록 반환
@@ -39,19 +32,35 @@ public class TVController {
 
         return genreService.getGenreNames();
     }
+
+    // 장르명에 매칭되는 장르 id 값 반환
+    @GetMapping("/tv/getGenreId")
+    public int getGenreId(@RequestParam String genreName) {
+
+        return genreService.getGenreId(genreName);
+    }
+
+    // 장르 id 에 매칭되는 장르명 반환
+    @GetMapping("/tv/getGenreName")
+    public String getGenreId(@RequestParam int genreId) {
+
+        return genreService.getGenreName(genreId);
+    }
     
     // 장르 id 목록에 매칭되는 TV Program 목록 반환
     @GetMapping("/tv/search/genres")
-    public ArrayList<TVProgram> getTVProgramsByGenreId(@RequestBody ArrayList<Integer> genreIds) {
+    public ArrayList<TVProgram> getTVProgramsByGenreIds(@RequestParam long lastId, @RequestBody ArrayList<Integer> genreIds) {
 
-        return tvService.getTVProgramsByGenreId(genreIds);
+        return tvService.getTVProgramsByGenreIds(lastId, genreIds);
     }
 
-    // 장르 id 에 매칭되는 TV Program 목록 반환
-    @GetMapping("/tv/search/genre")
-    public ArrayList<TVProgram> getTVProgramByGenreId(@RequestParam int genreId) {
+    // 최신순 TV Program 목록 반환
 
-        return tvService.getTVProgramByGenreId(genreId);
+
+    // 연도별 TV Program 목록 반환
+    @GetMapping("tv/search/year")
+    public ArrayList<TVProgram> getTVProgramsByYear(@RequestParam long lastId, String year){
+
+        return tvService.getTVProgramsByYear(lastId, year);
     }
-
 }

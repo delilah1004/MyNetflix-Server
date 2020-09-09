@@ -2,20 +2,14 @@ package com.tv.service;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.tv.data.Reader;
 import com.tv.data.StaticData;
-import com.tv.model.TVProgram;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 
 @Service
-public class GenreService extends Reader{
+public class GenreService extends Reader {
 
     private String url = StaticData.API_MAIN_URL;
 
@@ -58,6 +52,28 @@ public class GenreService extends Reader{
         }
 
         return genreId;
+    }
+
+    // 장르 id 로 장르명 반환
+    public String getGenreName(int genreId) {
+
+        String genreName = null;
+
+        url += "/genre/tv/list";
+        url += "?api_key=" + StaticData.API_KEY;
+        url += "&language=" + StaticData.KOREAN;
+
+        getReader(url);
+        JsonArray genres = getGenres();
+
+        for (JsonElement element : genres) {
+            if (genreId == element.getAsJsonObject().get("id").getAsInt()) {
+                genreName = element.getAsJsonObject().get("name").getAsString();
+                break;
+            }
+        }
+
+        return genreName;
     }
 
 }

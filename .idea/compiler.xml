@@ -9,12 +9,12 @@
         <module name="EurekaServer" />
         <module name="APIGateway" />
         <module name="TVService" />
-        <module name="SearchService" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="MovieService" target="1.5" />
       <module name="Search-Year" target="1.8" />
+      <module name="SearchService" target="1.8" />
       <module name="Test" target="1.8" />
     </bytecodeTargetLevel>
   </component>

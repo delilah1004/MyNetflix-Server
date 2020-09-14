@@ -16,6 +16,7 @@
       <module name="Search-Year" target="1.8" />
       <module name="SearchService" target="1.8" />
       <module name="Test" target="1.8" />
+      <module name="TVService" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

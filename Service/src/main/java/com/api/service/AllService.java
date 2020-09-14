@@ -27,4 +27,6 @@ public interface AllService {
     public ArrayList<TVProgram> getTVProgramList(ArrayList<Long> tvIdList);
 
     public JsonArray getPopularTVProgramIdList(int pageNumber);
+
+    public JsonArray getNowPlayingTVProgramIdList(int pageNumber);
 }

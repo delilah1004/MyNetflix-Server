@@ -24,7 +24,12 @@ public class HomeController {
         return homeService.getBestPopularMovies();
     }
     
-    // 최신 TV 프로그램 6개
+    // 최신 TV 프로그램 12개
+    @GetMapping("home/tv/now")
+    public ArrayList<TVProgram> getNowPlayingTVPrograms(){
+
+        return homeService.getNowPlayingTVPrograms();
+    }
     
     // 인기 TV 프로그램 12개
     @GetMapping("home/tv/popular")

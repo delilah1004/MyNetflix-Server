@@ -125,7 +125,11 @@ public class AllServiceImp extends Reader implements AllService {
                 }
 
                 // 영상 스트리밍 URL
-                movie.setHomepage(mv.get("homepage").getAsString());
+                try {
+                    movie.setHomepage(mv.get("homepage").getAsString());
+                } catch (Exception e) {
+                    movie.setHomepage(null);
+                }
 
                 // 방영일 정보
                 try {
@@ -147,10 +151,11 @@ public class AllServiceImp extends Reader implements AllService {
                 e.printStackTrace();
             }
         }
+
         return movies;
     }
 
-    // 인기 영화의 모든 정보 JsonObject 로 반환
+    // 인기 영화의 모든 정보 JsonArray 로 반환
     public JsonArray getPopularMovieIdList(int pageNumber) {
 
         String url = StaticData.API_MAIN_URL;
@@ -311,7 +316,7 @@ public class AllServiceImp extends Reader implements AllService {
         return tvPrograms;
     }
 
-    // 인기 TV 프로그램의 모든 정보 JsonObject 로 반환
+    // 인기 TV 프로그램의 모든 정보 JsonArray 로 반환
     public JsonArray getPopularTVProgramIdList(int pageNumber) {
 
         String url = StaticData.API_MAIN_URL;
@@ -324,4 +329,19 @@ public class AllServiceImp extends Reader implements AllService {
 
         return getJson().get("results").getAsJsonArray();
     }
+
+    // 최신 TV 프로그램의 모든 정보 JsonArray 로 반환
+    public JsonArray getNowPlayingTVProgramIdList(int pageNumber) {
+
+        String url = StaticData.API_MAIN_URL;
+        url += "/tv/now_playing";
+        url += "?api_key=" + StaticData.API_KEY;
+        url += "&language=" + StaticData.KOREAN;
+        url += "&page=" + pageNumber;
+
+        getReader(url);
+
+        return getJson().get("results").getAsJsonArray();
+    }
+    
 }

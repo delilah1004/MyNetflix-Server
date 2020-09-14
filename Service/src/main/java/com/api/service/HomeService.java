@@ -39,7 +39,7 @@ public class HomeService{
             for (JsonElement element : results) {
                 long id = element.getAsJsonObject().get("id").getAsLong();
 
-                if (allMovieIdList.contains(id)) popularMovieIdList.add(element.getAsJsonObject().get("id").getAsLong());
+                if (allMovieIdList.contains(id)) popularMovieIdList.add(id);
 
                 if (popularMovieIdList.size() == count) break;
             }
@@ -51,6 +51,34 @@ public class HomeService{
     }
 
     // 최신 TV 프로그램
+    public ArrayList<TVProgram> getNowPlayingTVPrograms() {
+
+        return allService.getTVProgramList(getNowPlayingTVIds());
+    }
+
+    // 최신 TV 프로그램 Id 반환
+    public ArrayList<Long> getNowPlayingTVIds() {
+
+        ArrayList<Long> allTvIdList = allService.getAllTVIds();
+        ArrayList<Long> nowPlayingTvIdList = new ArrayList<>();
+
+        for(int i=1; i<6; i++) {
+
+            JsonArray results = allService.getNowPlayingTVProgramIdList(i);
+
+            for (JsonElement element : results) {
+                long id = element.getAsJsonObject().get("id").getAsLong();
+
+                if (allTvIdList.contains(id)) nowPlayingTvIdList.add(id);
+
+                if (nowPlayingTvIdList.size() == count) break;
+            }
+
+            if (nowPlayingTvIdList.size() == count) break;
+        }
+
+        return nowPlayingTvIdList;
+    }
 
     // 인기 TV 프로그램
     public ArrayList<TVProgram> getBestPopularTVPrograms() {
@@ -71,7 +99,7 @@ public class HomeService{
             for (JsonElement element : results) {
                 long id = element.getAsJsonObject().get("id").getAsLong();
 
-                if (allTvIdList.contains(id)) popularTvIdList.add(element.getAsJsonObject().get("id").getAsLong());
+                if (allTvIdList.contains(id)) popularTvIdList.add(id);
 
                 if (popularTvIdList.size() == count) break;
             }

@@ -1,5 +1,6 @@
 package com.api.service;
 
+import com.api.data.StaticData;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.api.data.Reader;
@@ -22,7 +23,7 @@ public class MovieService extends Reader{
     public ArrayList<Movie> getAllMovies(int pageNumber) {
 
         // allMovieIdList 초기화
-        ArrayList<Long> allMovieIdList = allService.getAllMovieIds();
+        ArrayList<Long> allMovieIdList = allService.getMovieIds(StaticData.MOVIE_ID_LIST_FILE_PATH);
 
         // 매칭된 movieId 만 담을 list 초기화
         ArrayList<Long> movieIdList = new ArrayList<>();
@@ -38,10 +39,12 @@ public class MovieService extends Reader{
         return allService.getMovieList(movieIdList);
     }
 
+    /* ------ 장르별 검색 -------- */
+
     // 장르 id 목록에 매칭되는 영화 목록 반환
     public ArrayList<Movie> getMoviesByGenreIds(long lastId, ArrayList<Integer> genreIds) {
 
-        ArrayList<Long> allMovieIdList = allService.getAllMovieIds();
+        ArrayList<Long> allMovieIdList = allService.getMovieIds(StaticData.MOVIE_ID_LIST_FILE_PATH);
 
         // 매칭된 movieId 만 담을 list 초기화
         ArrayList<Long> movieIdList = new ArrayList<>();
@@ -77,10 +80,12 @@ public class MovieService extends Reader{
         return allService.getMovieList(movieIdList);
     }
 
+    /* ------ 연도별 검색 -------- */
+
     // 연도별 영화 목록 반환
     public ArrayList<Movie> getMoviesByYear(long lastId, String year) {
 
-        ArrayList<Long> allMovieIdList = allService.getAllMovieIds();
+        ArrayList<Long> allMovieIdList = allService.getMovieIds(StaticData.MOVIE_ID_LIST_FILE_PATH);
 
         // 매칭된 movieId 만 담을 list 초기화
         ArrayList<Long> movieIdList = new ArrayList<>();
@@ -118,5 +123,85 @@ public class MovieService extends Reader{
 
         return allService.getMovieList(movieIdList);
     }
+
+    /* ------ 인기순 검색 -------- */
+
+    // 인기순 - 내림차순 영화 목록 반환
+    public ArrayList<Movie> getPopularDescMovies(int pageNumber) {
+
+        ArrayList<Long> popularDescMovieIdList = allService.getMovieIds(StaticData.POPULAR_DESC_MOVIE_ID_LIST_FILE_PATH);
+
+        // 매칭된 movieId 만 담을 list 초기화
+        ArrayList<Long> movieIdList = new ArrayList<>();
+
+        // 검색을 시작할 인덱스
+        int startIndex = (pageNumber - 1) * count;
+
+        for (int i = startIndex; i < startIndex + count; i++) {
+            movieIdList.add(popularDescMovieIdList.get(i));
+        }
+
+        return allService.getMovieList(movieIdList);
+    }
+
+    // 인기순 - 오름차순 영화 목록 반환
+    public ArrayList<Movie> getPopularAscMovies(int pageNumber) {
+
+        // allMovieIdList 초기화
+        ArrayList<Long> allMovieIdList = allService.getMovieIds(StaticData.POPULAR_ASC_TV_ID_LIST_FILE_PATH);
+
+        // 매칭된 movieId 만 담을 list 초기화
+        ArrayList<Long> movieIdList = new ArrayList<>();
+
+        // 검색을 시작할 인덱스
+        int startIndex = (pageNumber - 1) * count;
+
+        for (int i = startIndex; i < startIndex + count; i++) {
+            movieIdList.add(allMovieIdList.get(i));
+        }
+
+        return allService.getMovieList(movieIdList);
+    }
+
+    /* ------ 개봉일순 검색 -------- */
+
+    // 최신순 영화 목록 반환
+    public ArrayList<Movie> getLatestMovies(int pageNumber) {
+
+        // allMovieIdList 초기화
+        ArrayList<Long> allMovieIdList = allService.getMovieIds(StaticData.LATEST_MOVIE_ID_LIST_FILE_PATH);
+
+        // 매칭된 movieId 만 담을 list 초기화
+        ArrayList<Long> movieIdList = new ArrayList<>();
+
+        // 검색을 시작할 인덱스
+        int startIndex = (pageNumber - 1) * count;
+
+        for (int i = startIndex; i < startIndex + count; i++) {
+            movieIdList.add(allMovieIdList.get(i));
+        }
+
+        return allService.getMovieList(movieIdList);
+    }
+
+    // 오래된순 영화 목록 반환
+    public ArrayList<Movie> getOldestMovies(int pageNumber) {
+
+        // allMovieIdList 초기화
+        ArrayList<Long> allMovieIdList = allService.getMovieIds(StaticData.OLDEST_MOVIE_ID_LIST_FILE_PATH);
+
+        // 매칭된 movieId 만 담을 list 초기화
+        ArrayList<Long> movieIdList = new ArrayList<>();
+
+        // 검색을 시작할 인덱스
+        int startIndex = (pageNumber - 1) * count;
+
+        for (int i = startIndex; i < startIndex + count; i++) {
+            movieIdList.add(allMovieIdList.get(i));
+        }
+
+        return allService.getMovieList(movieIdList);
+    }
+
 
 }

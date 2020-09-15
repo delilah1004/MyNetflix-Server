@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public interface AllService {
     
     // 영화
-    public ArrayList<Long> getAllMovieIds();
+    public ArrayList<Long> getMovieIds(String filePath);
 
     public JsonObject getMovieJsonById(long id);
 
@@ -18,11 +18,14 @@ public interface AllService {
 
     public ArrayList<Movie> getMovieList(ArrayList<Long> movieIdList);
 
+    // HomeService
     public JsonArray getPopularMovieIdList(int pageNumber);
+
+    public JsonArray getNowPlayingMovieIdList(int pageNumber);
     
 
     // TV 프로그램
-    public ArrayList<Long> getAllTVIds();
+    public ArrayList<Long> getTVIds(String filePath);
 
     public JsonObject getTVJsonById(long id);
 
@@ -30,6 +33,7 @@ public interface AllService {
 
     public ArrayList<TVProgram> getTVProgramList(ArrayList<Long> tvIdList);
 
+    // HomeService
     public JsonArray getPopularTVProgramIdList(int pageNumber);
 
     public JsonArray getOnTheAirTVProgramIdList(int pageNumber);

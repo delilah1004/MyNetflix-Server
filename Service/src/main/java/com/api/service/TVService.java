@@ -1,5 +1,6 @@
 package com.api.service;
 
+import com.api.data.StaticData;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.api.data.Reader;
@@ -21,7 +22,7 @@ public class TVService extends Reader {
     // 넷플릭스에서 방영되는 모든 TV Program 목록 반환
     public ArrayList<TVProgram> getAllTVPrograms(int pageNumber) {
 
-        ArrayList<Long> allTvIdList = allService.getAllTVIds();
+        ArrayList<Long> allTvIdList = allService.getTVIds(StaticData.TV_ID_LIST_FILE_PATH);
 
         // 매칭된 tvId 만 담을 list 초기화
         ArrayList<Long> tvIdList = new ArrayList<>();
@@ -29,7 +30,6 @@ public class TVService extends Reader {
         // 검색을 시작할 인덱스
         int startIndex = (pageNumber - 1) * count;
 
-        //for (long tvId : tvIdList) {
         for (int i = startIndex; i < startIndex + count; i++) {
             tvIdList.add(allTvIdList.get(i));
         }
@@ -37,10 +37,12 @@ public class TVService extends Reader {
         return allService.getTVProgramList(tvIdList);
     }
 
+    /* ------ 장르별 검색 -------- */
+
     // 장르 id 목록에 매칭되는 TV Program 목록 반환
     public ArrayList<TVProgram> getTVProgramsByGenreIds(long lastId, ArrayList<Integer> genreIds) {
 
-        ArrayList<Long> allTvIdList = allService.getAllTVIds();
+        ArrayList<Long> allTvIdList = allService.getTVIds(StaticData.TV_ID_LIST_FILE_PATH);
 
         // 매칭된 tvId 만 담을 list 초기화
         ArrayList<Long> tvIdList = new ArrayList<>();
@@ -76,10 +78,12 @@ public class TVService extends Reader {
         return allService.getTVProgramList(tvIdList);
     }
 
+    /* ------ 연도별 검색 -------- */
+
     // 연도별 TV Program 목록 반환
     public ArrayList<TVProgram> getTVProgramsByYear(long lastId, String year) {
 
-        ArrayList<Long> allTvIdList = allService.getAllTVIds();
+        ArrayList<Long> allTvIdList = allService.getTVIds(StaticData.TV_ID_LIST_FILE_PATH);
 
         // 매칭된 tvId 만 담을 list 초기화
         ArrayList<Long> tvIdList = new ArrayList<>();
@@ -116,9 +120,83 @@ public class TVService extends Reader {
         return allService.getTVProgramList(tvIdList);
     }
 
-    // 최신순 TV Program 목록 반환
+    /* ------ 인기순 검색 -------- */
 
-    // 인기순 TV Program 목록 반환
+    // 인기순 - 내림차순 TV Program 목록 반환
+    public ArrayList<TVProgram> getPopularDescTVPrograms(int pageNumber) {
+
+        ArrayList<Long> popularDescTvIdList = allService.getTVIds(StaticData.POPULAR_DESC_TV_ID_LIST_FILE_PATH);
+
+        // 매칭된 tvId 만 담을 list 초기화
+        ArrayList<Long> tvIdList = new ArrayList<>();
+
+        // 검색을 시작할 인덱스
+        int startIndex = (pageNumber - 1) * count;
+
+        for (int i = startIndex; i < popularDescTvIdList.size(); i++) {
+            tvIdList.add(popularDescTvIdList.get(i));
+        }
+
+        return allService.getTVProgramList(tvIdList);
+    }
+
+    // 인기순 - 오름차순 TV Program 목록 반환
+    public ArrayList<TVProgram> getPopularAscTVPrograms(int pageNumber) {
+
+        ArrayList<Long> popularAscTvIdList = allService.getTVIds(StaticData.POPULAR_ASC_TV_ID_LIST_FILE_PATH);
+
+        // 매칭된 tvId 만 담을 list 초기화
+        ArrayList<Long> tvIdList = new ArrayList<>();
+
+        // 검색을 시작할 인덱스
+        int startIndex = (pageNumber - 1) * count;
+
+        for (int i = startIndex; i < popularAscTvIdList.size(); i++) {
+            tvIdList.add(popularAscTvIdList.get(i));
+        }
+
+        return allService.getTVProgramList(tvIdList);
+    }
+
+
+    /* ------ 방영일순 검색 -------- */
+
+    // 최신순 TV Program 목록 반환
+    public ArrayList<TVProgram> getLatestTVPrograms(int pageNumber) {
+
+        ArrayList<Long> latestTvIdList = allService.getTVIds(StaticData.LATEST_TV_ID_LIST_FILE_PATH);
+
+        // 매칭된 tvId 만 담을 list 초기화
+        ArrayList<Long> tvIdList = new ArrayList<>();
+
+        // 검색을 시작할 인덱스
+        int startIndex = (pageNumber - 1) * count;
+
+        for (int i = startIndex; i < startIndex + count; i++) {
+            tvIdList.add(latestTvIdList.get(i));
+        }
+
+        return allService.getTVProgramList(tvIdList);
+    }
+
+    // 오래된순 TV Program 목록 반환
+    public ArrayList<TVProgram> getOldestTVPrograms(int pageNumber) {
+
+        ArrayList<Long> oldestTvIdList = allService.getTVIds(StaticData.OLDEST_TV_ID_LIST_FILE_PATH);
+
+        // 매칭된 tvId 만 담을 list 초기화
+        ArrayList<Long> tvIdList = new ArrayList<>();
+
+        // 검색을 시작할 인덱스
+        int startIndex = (pageNumber - 1) * count;
+
+        for (int i = startIndex; i < oldestTvIdList.size(); i++) {
+            tvIdList.add(oldestTvIdList.get(i));
+        }
+
+        return allService.getTVProgramList(tvIdList);
+    }
+
 
 }
 

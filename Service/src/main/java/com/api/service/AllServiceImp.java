@@ -22,8 +22,7 @@ public class AllServiceImp extends Reader implements AllService {
     /* ------    Movie     ------- */
 
     // 파일을 불러와 allMovieIdList 정보 업데이트
-    // 넷플릭스에서 방영되는 모든 영화들의 movie_id 목록 반환
-    public ArrayList<Long> getAllMovieIds() {
+    public ArrayList<Long> getMovieIds(String filePath) {
 
         FileReader fr = null;
         BufferedReader br = null;
@@ -33,7 +32,7 @@ public class AllServiceImp extends Reader implements AllService {
         ArrayList<Long> allMovieIdList = new ArrayList<Long>();
 
         try {
-            fr = new FileReader(new File(StaticData.MOVIE_ID_LIST_FILE_PATH));
+            fr = new FileReader(new File(filePath));
             br = new BufferedReader(fr);
 
             // file 한줄씩 읽기
@@ -176,12 +175,25 @@ public class AllServiceImp extends Reader implements AllService {
         return getJson().get("results").getAsJsonArray();
     }
 
+    // 최신 영화의 모든 정보 JsonArray 로 반환
+    public JsonArray getNowPlayingMovieIdList(int pageNumber) {
+
+        String url = StaticData.API_MAIN_URL;
+        url += "/movie/now_playing";
+        url += "?api_key=" + StaticData.API_KEY;
+        url += "&language=" + StaticData.KOREAN;
+        url += "&page=" + pageNumber;
+
+        getReader(url);
+
+        return getJson().get("results").getAsJsonArray();
+    }
+
 
     /* ------    TV Program     ------- */
 
     // 파일을 불러와 allTvIdList 정보 업데이트
-    // 넷플릭스에서 방영되는 모든 TV Program 들의 tv_id 목록 반환
-    public ArrayList<Long> getAllTVIds() {
+    public ArrayList<Long> getTVIds(String filePath) {
 
         FileReader fr = null;
         BufferedReader br = null;
@@ -191,7 +203,7 @@ public class AllServiceImp extends Reader implements AllService {
         ArrayList<Long> allTvIdList = new ArrayList<Long>();
 
         try {
-            fr = new FileReader(new File(StaticData.TV_ID_LIST_FILE_PATH));
+            fr = new FileReader(new File(filePath));
             br = new BufferedReader(fr);
 
             // file 한줄씩 읽기

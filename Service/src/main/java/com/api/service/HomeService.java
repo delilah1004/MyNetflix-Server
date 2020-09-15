@@ -51,33 +51,33 @@ public class HomeService{
     }
 
     // 최신 TV 프로그램
-    public ArrayList<TVProgram> getNowPlayingTVPrograms() {
+    public ArrayList<TVProgram> getOnTheAirTVPrograms() {
 
-        return allService.getTVProgramList(getNowPlayingTVIds());
+        return allService.getTVProgramList(getOnTheAirTVIds());
     }
 
     // 최신 TV 프로그램 Id 반환
-    public ArrayList<Long> getNowPlayingTVIds() {
+    public ArrayList<Long> getOnTheAirTVIds() {
 
         ArrayList<Long> allTvIdList = allService.getAllTVIds();
-        ArrayList<Long> nowPlayingTvIdList = new ArrayList<>();
+        ArrayList<Long> onTheAirTvIdList = new ArrayList<>();
 
-        for(int i=1; i<6; i++) {
+        for(int i=1; i<10; i++) {
 
-            JsonArray results = allService.getNowPlayingTVProgramIdList(i);
+            JsonArray results = allService.getOnTheAirTVProgramIdList(i);
 
             for (JsonElement element : results) {
                 long id = element.getAsJsonObject().get("id").getAsLong();
 
-                if (allTvIdList.contains(id)) nowPlayingTvIdList.add(id);
+                if (allTvIdList.contains(id)) onTheAirTvIdList.add(id);
 
-                if (nowPlayingTvIdList.size() == count) break;
+                if (onTheAirTvIdList.size() == count) break;
             }
 
-            if (nowPlayingTvIdList.size() == count) break;
+            if (onTheAirTvIdList.size() == count) break;
         }
 
-        return nowPlayingTvIdList;
+        return onTheAirTvIdList;
     }
 
     // 인기 TV 프로그램

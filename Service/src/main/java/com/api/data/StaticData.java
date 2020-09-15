@@ -7,7 +7,7 @@ public class StaticData {
     //public static final String TV_ID_LIST_FILE_PATH = "D:\\MyNetflix\\file\\tvIdList.txt";
 
     // NETFLIX 에서 방영중인 movie_id 목록이 저장된 file 경로
-    public static final String MOVIE_ID_LIST_FILE_PATH = "C:\\Users\\DIR-P-0074\\Desktop\\MyNetflix\\file\\allMovieIdList.txt";
+    public static final String MOVIE_ID_LIST_FILE_PATH = "C:\\Users\\DIR-P-0074\\Desktop\\MyNetflix\\file\\movieIdList.txt";
     //public static final String MOVIE_ID_LIST_FILE_PATH = "D:\\MyNetflix\\file\\movieIdList.txt";
 
     public static final String API_MAIN_URL = "https://api.themoviedb.org/3";

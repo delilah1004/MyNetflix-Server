@@ -26,6 +26,13 @@ public class TVController {
         return tvService.getAllTVPrograms(pageNumber);
     }
 
+    // 넷플릭스에서 방영되는 모든 TV Program 목록 인기 내림차순 반환 - 페이징
+    @GetMapping("tv/popular/desc")
+    public ArrayList<TVProgram> getPopularTVProgramsDesc(@RequestParam long lastId){
+
+        return tvService.getPopularTVProgramsDesc(lastId);
+    }
+
     // 모든 TV Program 을 분류하는 장르명 목록 반환
     @GetMapping("/tv/genres")
     public ArrayList<String> getTVGenreNames() {
@@ -60,5 +67,7 @@ public class TVController {
 
         return tvService.getTVProgramsByYear(lastId, year);
     }
+
+
 
 }

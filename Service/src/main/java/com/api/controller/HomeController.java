@@ -26,9 +26,9 @@ public class HomeController {
     
     // 최신 TV 프로그램 12개
     @GetMapping("home/tv/now")
-    public ArrayList<TVProgram> getNowPlayingTVPrograms(){
+    public ArrayList<TVProgram> getOnTheAirTVPrograms(){
 
-        return homeService.getNowPlayingTVPrograms();
+        return homeService.getOnTheAirTVPrograms();
     }
     
     // 인기 TV 프로그램 12개

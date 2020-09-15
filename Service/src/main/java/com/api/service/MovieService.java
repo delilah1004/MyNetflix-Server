@@ -60,7 +60,7 @@ public class MovieService extends Reader{
         // 선택된 장르에 매칭되는 영화의 id 리스트 생성 (최대 15개)
         for (int i = startIndex; i < allMovieIdList.size(); i++) {
 
-            JsonObject movie = allService.getMovieById(allMovieIdList.get(i));
+            JsonObject movie = allService.getMovieJsonById(allMovieIdList.get(i));
 
             // 해당 영화의 장르 중 검색할 장르가 포함되어 있는지 검사
             for (JsonElement element : movie.get("genres").getAsJsonArray()) {
@@ -99,7 +99,7 @@ public class MovieService extends Reader{
         // 선택된 장르에 매칭되는 영화의 id 리스트 생성 (최대 15개)
         for (int i = startIndex; i < allMovieIdList.size(); i++) {
 
-            JsonObject movie = allService.getMovieById(allMovieIdList.get(i));
+            JsonObject movie = allService.getMovieJsonById(allMovieIdList.get(i));
 
             try {
                 // 해당 영화의 방영일이 year 값과 동일한지 검사

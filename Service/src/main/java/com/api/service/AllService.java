@@ -12,7 +12,9 @@ public interface AllService {
     // 영화
     public ArrayList<Long> getAllMovieIds();
 
-    public JsonObject getMovieById(long id);
+    public JsonObject getMovieJsonById(long id);
+
+    public Movie getMovieById(long id);
 
     public ArrayList<Movie> getMovieList(ArrayList<Long> movieIdList);
 
@@ -22,11 +24,13 @@ public interface AllService {
     // TV 프로그램
     public ArrayList<Long> getAllTVIds();
 
-    public JsonObject getTVById(long id);
+    public JsonObject getTVJsonById(long id);
+
+    public TVProgram getTVById(long id);
 
     public ArrayList<TVProgram> getTVProgramList(ArrayList<Long> tvIdList);
 
     public JsonArray getPopularTVProgramIdList(int pageNumber);
 
-    public JsonArray getNowPlayingTVProgramIdList(int pageNumber);
+    public JsonArray getOnTheAirTVProgramIdList(int pageNumber);
 }

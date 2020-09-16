@@ -17,7 +17,7 @@ public class TVService extends Reader {
     AllService allService;
 
     // 한 페이지에 띄울 TV Program 의 개수
-    private final int count = 15;
+    private final int count = 16;
 
     // 넷플릭스에서 방영되는 모든 TV Program 목록 반환
     public ArrayList<TVProgram> getAllTVPrograms(int pageNumber) {
@@ -133,7 +133,7 @@ public class TVService extends Reader {
         // 검색을 시작할 인덱스
         int startIndex = (pageNumber - 1) * count;
 
-        for (int i = startIndex; i < popularDescTvIdList.size(); i++) {
+        for (int i = startIndex; i < startIndex + count; i++) {
             tvIdList.add(popularDescTvIdList.get(i));
         }
 
@@ -151,7 +151,7 @@ public class TVService extends Reader {
         // 검색을 시작할 인덱스
         int startIndex = (pageNumber - 1) * count;
 
-        for (int i = startIndex; i < popularAscTvIdList.size(); i++) {
+        for (int i = startIndex; i < startIndex + count; i++) {
             tvIdList.add(popularAscTvIdList.get(i));
         }
 
@@ -190,7 +190,7 @@ public class TVService extends Reader {
         // 검색을 시작할 인덱스
         int startIndex = (pageNumber - 1) * count;
 
-        for (int i = startIndex; i < oldestTvIdList.size(); i++) {
+        for (int i = startIndex; i < startIndex + count; i++) {
             tvIdList.add(oldestTvIdList.get(i));
         }
 

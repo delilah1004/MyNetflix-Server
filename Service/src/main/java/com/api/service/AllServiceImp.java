@@ -115,9 +115,9 @@ public class AllServiceImp extends Reader implements AllService {
 
             // 포스터 URI
             try {
-                movie.setPosterPath(mv.get("poster_path").getAsString());
+                movie.setPosterPath(StaticData.API_IMAGE_URL + mv.get("poster_path").getAsString());
             } catch (Exception e) {
-                movie.setPosterPath(null);
+                movie.setPosterPath(StaticData.EMPTY_IMAGE_URL);
             }
 
             // 영상 스트리밍 URL
@@ -285,9 +285,9 @@ public class AllServiceImp extends Reader implements AllService {
 
             // 포스터 URI
             try {
-                tvProgram.setPosterPath(tv.get("poster_path").getAsString());
+                tvProgram.setPosterPath(StaticData.API_IMAGE_URL + tv.get("poster_path").getAsString());
             } catch (Exception e) {
-                tvProgram.setPosterPath(null);
+                tvProgram.setPosterPath(StaticData.EMPTY_IMAGE_URL);
             }
 
             // 영상 스트리밍 URL

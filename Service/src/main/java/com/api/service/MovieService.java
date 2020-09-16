@@ -19,19 +19,18 @@ public class MovieService extends Reader{
     // 한 페이지에 띄울 영화의 개수
     private final int count = 15;
 
-    // 넷플릭스에서 방영되는 모든 영화 목록 반환
+    // 넷플릭스에서 방영되는 모든 TV Program 목록 반환
     public ArrayList<Movie> getAllMovies(int pageNumber) {
 
-        // allMovieIdList 초기화
         ArrayList<Long> allMovieIdList = allService.getMovieIds(StaticData.MOVIE_ID_LIST_FILE_PATH);
 
         // 매칭된 movieId 만 담을 list 초기화
-        ArrayList<Long> movieIdList = new ArrayList<>();
+        ArrayList<Long> movieIdList = new ArrayList<Long>();
 
         // 검색을 시작할 인덱스
         int startIndex = (pageNumber - 1) * count;
 
-        //for (long movieId : movieIdList) {
+        // for (long movieId : movieIdList) {
         for (int i = startIndex; i < startIndex + count; i++) {
             movieIdList.add(allMovieIdList.get(i));
         }
@@ -47,7 +46,7 @@ public class MovieService extends Reader{
         ArrayList<Long> allMovieIdList = allService.getMovieIds(StaticData.MOVIE_ID_LIST_FILE_PATH);
 
         // 매칭된 movieId 만 담을 list 초기화
-        ArrayList<Long> movieIdList = new ArrayList<>();
+        ArrayList<Long> movieIdList = new ArrayList<Long>();
 
         // 검색을 시작할 인덱스
         int startIndex;
@@ -74,7 +73,8 @@ public class MovieService extends Reader{
             }
 
             // 한 페이지에 띄울 영화의 개수를 충족하면 종료
-            if (movieIdList.size() == count) break;
+            if (movieIdList.size() == count)
+                break;
         }
 
         return allService.getMovieList(movieIdList);
@@ -88,7 +88,7 @@ public class MovieService extends Reader{
         ArrayList<Long> allMovieIdList = allService.getMovieIds(StaticData.MOVIE_ID_LIST_FILE_PATH);
 
         // 매칭된 movieId 만 담을 list 초기화
-        ArrayList<Long> movieIdList = new ArrayList<>();
+        ArrayList<Long> movieIdList = new ArrayList<Long>();
 
         // 검색을 시작할 인덱스
         int startIndex;
@@ -118,7 +118,8 @@ public class MovieService extends Reader{
             }
 
             // 한 페이지에 띄울 영화의 개수를 충족하면 종료
-            if (movieIdList.size() == count) break;
+            if (movieIdList.size() == count)
+                break;
         }
 
         return allService.getMovieList(movieIdList);
@@ -129,10 +130,11 @@ public class MovieService extends Reader{
     // 인기순 - 내림차순 영화 목록 반환
     public ArrayList<Movie> getPopularDescMovies(int pageNumber) {
 
-        ArrayList<Long> popularDescMovieIdList = allService.getMovieIds(StaticData.POPULAR_DESC_MOVIE_ID_LIST_FILE_PATH);
+        ArrayList<Long> popularDescMovieIdList = allService
+                .getMovieIds(StaticData.POPULAR_DESC_MOVIE_ID_LIST_FILE_PATH);
 
         // 매칭된 movieId 만 담을 list 초기화
-        ArrayList<Long> movieIdList = new ArrayList<>();
+        ArrayList<Long> movieIdList = new ArrayList<Long>();
 
         // 검색을 시작할 인덱스
         int startIndex = (pageNumber - 1) * count;
@@ -151,7 +153,7 @@ public class MovieService extends Reader{
         ArrayList<Long> allMovieIdList = allService.getMovieIds(StaticData.POPULAR_ASC_TV_ID_LIST_FILE_PATH);
 
         // 매칭된 movieId 만 담을 list 초기화
-        ArrayList<Long> movieIdList = new ArrayList<>();
+        ArrayList<Long> movieIdList = new ArrayList<Long>();
 
         // 검색을 시작할 인덱스
         int startIndex = (pageNumber - 1) * count;
@@ -172,7 +174,7 @@ public class MovieService extends Reader{
         ArrayList<Long> allMovieIdList = allService.getMovieIds(StaticData.LATEST_MOVIE_ID_LIST_FILE_PATH);
 
         // 매칭된 movieId 만 담을 list 초기화
-        ArrayList<Long> movieIdList = new ArrayList<>();
+        ArrayList<Long> movieIdList = new ArrayList<Long>();
 
         // 검색을 시작할 인덱스
         int startIndex = (pageNumber - 1) * count;
@@ -191,7 +193,7 @@ public class MovieService extends Reader{
         ArrayList<Long> allMovieIdList = allService.getMovieIds(StaticData.OLDEST_MOVIE_ID_LIST_FILE_PATH);
 
         // 매칭된 movieId 만 담을 list 초기화
-        ArrayList<Long> movieIdList = new ArrayList<>();
+        ArrayList<Long> movieIdList = new ArrayList<Long>();
 
         // 검색을 시작할 인덱스
         int startIndex = (pageNumber - 1) * count;

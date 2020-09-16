@@ -42,7 +42,9 @@ public class StaticData {
     /* --------- 공통 정보 ---------- */
 
     public static final String API_MAIN_URL = "https://api.themoviedb.org/3";
-    public static final String API_IMAGE_URL = "https://image.tmdb.org/t/p/w600_and_h900_bestv2";
+    public static final String API_IMAGE_URL = "https://image.tmdb.org/t/p/w300";
+    //public static final String API_IMAGE_URL = "https://image.tmdb.org/t/p/w600_and_h900_bestv2";
+    public static final String EMPTY_IMAGE_URL = "http://placehold.it/185x278";
 
     public static final String API_KEY = "334cc048cf91e9c7e784d8d3241e3b4c";
     public static final String KOREAN = "ko-KR";
